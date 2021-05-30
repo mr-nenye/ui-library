@@ -51,7 +51,10 @@ const ButtonContainer = styled.div`
 
 export const Button = (props) => {
     return (
-        <ButtonContainer {...props}>
+        <ButtonContainer 
+        {...props}
+        onClick={props.onClick}
+        >
             {props.children}
         </ButtonContainer>
     )
