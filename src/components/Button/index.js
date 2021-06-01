@@ -11,9 +11,9 @@ const ButtonContainer = styled.div`
     background-color: ${(props) => props.bgColor};
     color: ${(props) => props.fontColor};
     padding: ${(props) => props.padding};
-    font-family: 'Courier New', Courier, monospace;
+    /* font-family: 'Courier New', Courier, monospace; */
     box-shadow: 0 3px 12px rgba(227,222,222,.5);
-    font-size: 14px;
+    font-size: 0.75rem;
     border-radius: ${(props) => props.round ? `${props.height / 2}px` : '5px'};
 
     ${(props) =>

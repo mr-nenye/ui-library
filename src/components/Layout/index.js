@@ -38,6 +38,11 @@ const AppLogo = styled.div`
 `;
 
 const SideMenu = styled.div`
+    ${(props) =>
+      props.collapse &&
+      css`
+          width: ${(props) => props.closeWidth};
+    `}
     width: ${(props) => props.collapse ? props.closeWidth : props.openWidth};
     display: block;
     z-index:  ${(props) => props.zIndex};
@@ -51,11 +56,7 @@ const SideMenu = styled.div`
     overflow-x: hidden;
     white-space: nowrap;
 
-    ${(props) =>
-    props.collapse &&
-    css`
-        width: ${(props) => props.closeWidth};
-    `}
+    
 
     & .sidemenu {
     list-style-type: none;
@@ -64,6 +65,7 @@ const SideMenu = styled.div`
     width: 100%;
 
         & .menuItem {
+            margin: 10px 0;
             & a {
                 box-sizing: border-box;
                 cursor: pointer;
@@ -73,7 +75,7 @@ const SideMenu = styled.div`
                 text-transform: capitalize;
                 font-size: ${(props) => props.fontSize};
                 text-decoration: none;
-                padding: 15px 10px;
+                padding: 10px;
                 color: ${(props) => props.fontColor ? props.fontColor : "#17223b"};
 
                 & i {
@@ -109,6 +111,13 @@ const Content = styled.div`
     css`
         margin-left: ${(props) => props.closeWidth};
     `}
+
+    ${(props) =>
+    props.noSideMenu &&
+    css`
+        margin-left: 0;
+    `}
+
 `
 
 const SidebarItem = ({
@@ -168,6 +177,7 @@ export const Layout = ({menuItems, depthStep, depth, ...props}) => {
                     iconsOnly={props.iconsOnly}
                     // collapsedWidth={props.collapsedWidth}
                     bgColor={props.bgColor}
+                    zIndex={props.zIndex}
                 >
                     {props.appLogo ? (
                         <AppLogo>
@@ -200,7 +210,7 @@ Layout.defaultProps = {
     closeWidth: '100px',
     zIndex: 99,
     // bgColor: '#FFF',
-    fontSize: "13px",
+    fontSize: "12px",
     spaceTop: '0',
     collapse: false,
 };
