@@ -4,6 +4,7 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import {Layout, Header} from './components/';
 import TablePage from './pages/tables'
 import ButtonPage from './pages/buttons'
+import TypographyPage from './pages/typography'
 
 function App() {
 
@@ -22,6 +23,11 @@ function App() {
       name: "button",
       label: "Buttons",
       link: "/Buttons",
+    },
+    {
+      name: "typography",
+      label: "Typography",
+      link: "/Typography",
     },
   ];
 
@@ -47,6 +53,11 @@ function App() {
             exact
             path="/Buttons"
             component={() => <ButtonPage />}
+          />
+          <Route
+            exact
+            path="/Typography"
+            component={() => <TypographyPage />}
           />
         </Layout>
       </Switch>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, TableWrapper} from '../../components/Table';
+import {Table, TableWrapper} from '../../components';
 
 
 const TablePage = () => {
