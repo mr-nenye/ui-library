@@ -21,7 +21,7 @@ const HeaderContainer = styled.div`
 export const Header = (props) => {
     return (
         <HeaderContainer {...props}>
-
+            {props.children}
         </HeaderContainer>
     )
 }
