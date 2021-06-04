@@ -3,6 +3,7 @@ import styled, {css} from 'styled-components';
 import { transparentize, darken } from "polished";
 import { NavLink } from "react-router-dom";
 import PropTypes from 'prop-types';
+import {Tooltip} from '../../components'
 
 const LayoutContainer = styled.div`
     display: flex;
@@ -20,7 +21,7 @@ const AppLogo = styled.div`
   margin-bottom: 10px;
   padding: 0 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  display: none;
+  /* display: none; */
   align-content: center;
   align-items: center;
   justify-content: flex-start;
@@ -38,12 +39,7 @@ const AppLogo = styled.div`
 `;
 
 const SideMenu = styled.div`
-    ${(props) =>
-      props.collapse &&
-      css`
-          width: ${(props) => props.closeWidth};
-    `}
-    width: ${(props) => props.collapse ? props.closeWidth : props.openWidth};
+    width: ${(props) => props.openWidth};
     display: block;
     z-index:  ${(props) => props.zIndex};
     background-color: ${(props) => props.bgColor ? props.bgColor : "#fff"};
@@ -56,6 +52,11 @@ const SideMenu = styled.div`
     overflow-x: hidden;
     white-space: nowrap;
 
+    ${(props) =>
+      props.collapse &&
+      css`
+          width: ${(props) => props.closeWidth};
+    `}
     
 
     & .sidemenu {
@@ -97,6 +98,15 @@ const SideMenu = styled.div`
                 }
             }
         }
+    }
+
+    & .bottom-section {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
     }
 `
 
@@ -172,30 +182,55 @@ export const Layout = ({menuItems, depthStep, depth, ...props}) => {
             {props.noSideMenu ? (null) : (
                 <SideMenu
                     openWidth={props.openWidth}
+                    closeWidth={props.closeWidth}
                     fontSize={props.fontSize}
                     collapse={props.collapse}
                     iconsOnly={props.iconsOnly}
-                    // collapsedWidth={props.collapsedWidth}
                     bgColor={props.bgColor}
                     zIndex={props.zIndex}
+                    appLogo={props.appLogo}
                 >
                     {props.appLogo ? (
-                        <AppLogo>
-                        <img src={props.appLogo} />
-                        </AppLogo>
+                      <AppLogo>
+                        {props.appLogo}
+                      </AppLogo>
                     ) : null}
                     <ul className="sidemenu">
-                        {menuItems.map((sidebarItem, index) => (
-                            <SidebarItem
-                            key={sidebarItem.name}
-                            depthStep={depthStep}
-                            depth={depth}
-                            onClick={setActive}
-                            isActive={active === sidebarItem.name}
-                            {...sidebarItem}
-                            />
-                        ))}
+                        {props.collapse ? (
+                          <>
+                              {menuItems.map((sidebarItem, index) => (
+                                <Tooltip text={sidebarItem.name}>
+                                  <SidebarItem
+                                    key={sidebarItem.name}
+                                    depthStep={depthStep}
+                                    depth={depth}
+                                    onClick={setActive}
+                                    isActive={active === sidebarItem.name}
+                                    {...sidebarItem}
+                                  />
+                                </Tooltip>
+                            ))}
+                          </>
+                        ) : (
+                          <>
+                            {menuItems.map((sidebarItem, index) => (
+                              <SidebarItem
+                              key={sidebarItem.name}
+                              depthStep={depthStep}
+                              depth={depth}
+                              onClick={setActive}
+                              isActive={active === sidebarItem.name}
+                              {...sidebarItem}
+                              />
+                            ))}
+                          </>
+                        )}
                     </ul>
+                    
+                    <div className="bottom-section">
+                      {props.bottomSection}
+                    </div>
+                    
                 </SideMenu>
             )}
             <Content {...props}>
@@ -231,4 +266,5 @@ Layout.propTypes = {
     activeLinkFontColor: PropTypes.string,
     hoverLinkColor: PropTypes.string,
     hoverLinkFontColor: PropTypes.string,
+    bottomSection: PropTypes.any
 };
