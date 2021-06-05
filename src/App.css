@@ -34,9 +34,8 @@
 }
 
 .user-section {
-  background-color: #fafafa;
   width: 100%;
-  padding: 20px 10px;
+  padding: 20px 0;
   box-sizing: border-box;
   display: flex;
   border-radius: 5px;
@@ -44,7 +43,7 @@
 
 .user-section img {
   border-radius: 100px;
-  margin-right: 15px;
+  margin-right: 25px;
   position: relative;
 }
 
