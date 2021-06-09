@@ -5,6 +5,7 @@ import {Layout, Header, Text} from './components/';
 import TablePage from './pages/tables'
 import ButtonPage from './pages/buttons'
 import TypographyPage from './pages/typography'
+import InputPage from './pages/input'
 import { NavLink } from "react-router-dom"
 import './assets/fonts/fontello/css/ezy.css'
 import appLogo from './assets/ezy-logo.svg'
@@ -42,6 +43,12 @@ function App() {
       name: "typography",
       label: "Typography",
       link: "/Typography",
+      icon: "icon-fi-rr-settings-sliders"
+    },
+    {
+      name: "input",
+      label: "Input",
+      link: "/Input",
       icon: "icon-fi-rr-settings-sliders"
     },
   ];
@@ -113,6 +120,11 @@ function App() {
             exact
             path="/Typography"
             component={() => <TypographyPage />}
+          />
+          <Route
+            exact
+            path="/Input"
+            component={() => <InputPage />}
           />
         </Layout>
       </Switch>
